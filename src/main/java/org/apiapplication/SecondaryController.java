@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,30 +29,34 @@ public class SecondaryController {
     @FXML
     private TextArea detailsTextArea;
 
-    ObservableList<String> items = FXCollections.observableArrayList();
+    ObservableList<String> countryNameList = FXCollections.observableArrayList();
+    ObservableList<String> list = FXCollections.observableArrayList();
+
     public Model m;
     public List<Model> arraysOfModel = new ArrayList<>();
 
 
     @FXML
-    public void initialize(List<String> listModel) throws IOException, ParseException {
-        items.addAll(listModel);
-        listView.getItems().setAll(items);
-        listView.getSelectionModel().getSelectionMode();
-        for (String a:
-             items) {
-            m = APIController.getDataFromAPI("Countries", false, a);
+    public void initialize(List<String> countryNameList, List<Model> model){
+        list.addAll(countryNameList);
+        System.out.println(model);
+        for (Model a:
+                model) {
+            m = a;
+            System.out.println("Country name from model is " + m.getCountryName());
             arraysOfModel.add(m);
+            this.countryNameList.add(m.getCountryName());
         }
+        arraysOfModel.addAll(model);
+        listView.getItems().setAll(this.countryNameList);
+        listView.getSelectionModel().getSelectionMode();
     }
 
     @FXML
     public void handleClickListView(){
         List<String> listOfSelectedItem = Collections.singletonList(listView.getSelectionModel().getSelectedItem());
         String temp = listOfSelectedItem.toString();
-        temp = temp.replaceAll(" ", "-");
-        temp = temp.replaceAll("[^A-Za-z-]", "");
-        System.out.println(temp);
+        temp = temp.replaceAll("[^A-Za-z ]", "");
         for (Model model : arraysOfModel) {
             if (model.getCountryName().equals(temp)) {
                 detailsTextArea.setText(model.getDetails(true));

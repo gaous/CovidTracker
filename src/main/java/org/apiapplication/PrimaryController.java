@@ -34,6 +34,8 @@ public class PrimaryController {
     Model model = new Model();
 
     ArrayList<String> countriesTextArray = new ArrayList<>();
+    ArrayList<String> slugTextArray = new ArrayList<>();
+    ArrayList<Model> modelArray = new ArrayList<>();
 
     @FXML
     private void handleEnterButton(KeyEvent e){
@@ -47,26 +49,40 @@ public class PrimaryController {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
                 alert.show();
             } else {
-                String temp = countriesTextField.getText().trim().toLowerCase();
-                temp = temp.replaceAll(" ", "-");
-                temp = temp.replaceAll("[^A-Za-z-]", "");
-                if (countriesText.length() == 0 && temp.length() == 0) {
-                    countriesText = countriesText + temp.toLowerCase();
+                String tempCountryName = countriesTextField.getText().trim().toLowerCase();
+                if (countriesText.length() == 0 && tempCountryName.length() == 0) {
+                    countriesText = countriesText + tempCountryName.toLowerCase();
                     //TODO Create a function for the alert thing
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Please do not include any special characters including numbers");
                     alert.show();
-                } else if (countriesText.contains(temp.toLowerCase())) {
+                } else if (countriesText.contains(tempCountryName.toLowerCase())) {
                     //TODO Create a function for the alert thing
                     Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
                     alert.show();
                 } else {
-                    countriesTextArray.add(temp);
+                    try{
+                        model = APIController.getDataFromAPI("Countries", false, tempCountryName);
+                        if (model.getCountryName().length() == 0){
+                            //TODO Create a function for the alert thing
+                            Alert alert = new Alert(Alert.AlertType.WARNING, "Please input a valid country name");
+                            alert.show();
+                        }
+                        countriesTextArray.add(model.getCountryName());
+                        slugTextArray.add(model.getSlug_name());
+                        modelArray.add(model);
+                    }
+                    catch (Error error){
+                        System.out.println(error.toString());
+
+                    } catch (ParseException | IOException parseException) {
+                        parseException.printStackTrace();
+                    }
                 }
                 if(countriesTextArray.size() < 2){
-                    countriesLabel.setText(temp.toUpperCase().replaceAll("-", " "));
+                    countriesLabel.setText(model.getCountryName());
                 }
                 else{
-                    countriesLabel.setText(countriesLabel.getText() + ", " + temp.toUpperCase().replaceAll("-", " "));
+                    countriesLabel.setText(countriesLabel.getText() + ", " + model.getCountryName());
                 }
                 countriesTextField.setText("");
                 countriesTextField.requestFocus();
@@ -104,7 +120,7 @@ public class PrimaryController {
     }
 
     @FXML
-    private void handleSearchButton(ActionEvent event) throws IOException, ParseException {
+    private void handleSearchButton(ActionEvent event) throws IOException{
 //            App.setRoot("secondary");
         if(isSearchEligibleNow()){
             FXMLLoader loader = new FXMLLoader();
@@ -113,7 +129,8 @@ public class PrimaryController {
             Scene scene = new Scene(parent);
             SecondaryController controller = loader.getController();
             List<String> a = (countriesTextArray);
-            controller.initialize(a);
+            List<Model> b = (modelArray);
+            controller.initialize(a, b);
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
             window.setScene(scene);
             window.show();
