@@ -28,7 +28,7 @@ public class Model {
                     this.getTotalDeaths() + " Total Deaths | " +
                     this.getNewDeaths() + " New Deaths | " +
                     this.getTotalRecovered() + " Total Recovered cases | " +
-                    this.getNewRecovered() + " New Recovered cases in" +
+                    this.getNewRecovered() + " New Recovered cases in " +
                     this.getCountryName();
         else
             return "As of Today, there are " +

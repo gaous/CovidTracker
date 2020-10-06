@@ -60,22 +60,22 @@ public class PrimaryController {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
                     alert.show();
                 } else {
-                    try{
+                    try {
                         model = APIController.getDataFromAPI("Countries", false, tempCountryName);
-                        if (model.getCountryName().length() == 0){
-                            //TODO Create a function for the alert thing
-                            Alert alert = new Alert(Alert.AlertType.WARNING, "Please input a valid country name");
-                            alert.show();
+                        if(model.getCountryName().length() == 0)
+                            throw new Exception();
+                        else {
+                            countriesTextArray.add(model.getCountryName());
+                            slugTextArray.add(model.getSlug_name());
+                            modelArray.add(model);
                         }
-                        countriesTextArray.add(model.getCountryName());
-                        slugTextArray.add(model.getSlug_name());
-                        modelArray.add(model);
                     }
-                    catch (Error error){
-                        System.out.println(error.toString());
-
-                    } catch (ParseException | IOException parseException) {
-                        parseException.printStackTrace();
+                    catch ( NullPointerException n1){
+                        //TODO Create a function for the alert thing
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Please input a valid country name");
+                        alert.show();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
                 }
                 if(countriesTextArray.size() < 2){
