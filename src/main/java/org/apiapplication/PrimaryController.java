@@ -34,8 +34,7 @@ public class PrimaryController {
     Model model = new Model();
 
     ArrayList<String> countriesTextArray = new ArrayList<>();
-    ArrayList<String> slugTextArray = new ArrayList<>();
-    ArrayList<Model> modelArray = new ArrayList<>();
+    ArrayList<Model> countryArray = new ArrayList<>();
 
     @FXML
     private void handleEnterButton(KeyEvent e){
@@ -44,30 +43,23 @@ public class PrimaryController {
                 //TODO Create a function for the alert thing
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Please write a country name in the text box to include");
                 alert.show();
-            } else if (countriesText.contains(countriesTextField.getText().trim().toLowerCase())) {
-                //TODO Create a function for the alert thing
-                Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
-                alert.show();
-            } else {
-                String tempCountryName = countriesTextField.getText().trim().toLowerCase();
-                if (countriesText.length() == 0 && tempCountryName.length() == 0) {
-                    countriesText = countriesText + tempCountryName.toLowerCase();
-                    //TODO Create a function for the alert thing
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "Please do not include any special characters including numbers");
-                    alert.show();
-                } else if (countriesText.contains(tempCountryName.toLowerCase())) {
-                    //TODO Create a function for the alert thing
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
-                    alert.show();
-                } else {
+            } else
+                {
+                    String tempCountryName = countriesTextField.getText().trim();
                     try {
                         model = APIController.getDataFromAPI("Countries", false, tempCountryName);
                         if(model.getCountryName().length() == 0)
                             throw new Exception();
                         else {
-                            countriesTextArray.add(model.getCountryName());
-                            slugTextArray.add(model.getSlug_name());
-                            modelArray.add(model);
+                                if (!countriesTextArray.toString().toLowerCase().contains(tempCountryName.toLowerCase())) {
+                                    countriesTextArray.add(model.getCountryName());
+                                    countryArray.add(model);
+                                }
+                                else{
+                                    //TODO Create a function for the alert thing
+                                    Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
+                                    alert.show();
+                                }
                         }
                     }
                     catch ( NullPointerException n1){
@@ -77,17 +69,16 @@ public class PrimaryController {
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-                }
-                if(countriesTextArray.size() < 2){
+                    if(countriesTextArray.size() < 2){
                     countriesLabel.setText(model.getCountryName());
-                }
-                else{
+                    }
+                    else{
                     countriesLabel.setText(countriesLabel.getText() + ", " + model.getCountryName());
-                }
-                countriesTextField.setText("");
-                countriesTextField.requestFocus();
+                    }
+                    countriesTextField.setText("");
+                    countriesTextField.requestFocus();
 
-            }
+                }
         }
     }
 
@@ -129,7 +120,7 @@ public class PrimaryController {
             Scene scene = new Scene(parent);
             SecondaryController controller = loader.getController();
             List<String> a = (countriesTextArray);
-            List<Model> b = (modelArray);
+            List<Model> b = (countryArray);
             controller.initialize(a, b);
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
             window.setScene(scene);
@@ -155,5 +146,4 @@ public class PrimaryController {
         model = APIController.getDataFromAPI("Global", true, "");
         globalDataLabel.setText(model.getDetails(false));
     }
-
 }
