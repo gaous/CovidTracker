@@ -24,7 +24,6 @@ public class PrimaryController {
 //    private void switchToSecondary() throws IOException {
 //        App.setRoot("secondary");
 //    }
-    private String countriesText = "";
     @FXML
     private Label globalDataLabel;
     @FXML
@@ -60,6 +59,12 @@ public class PrimaryController {
                                     Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
                                     alert.show();
                                 }
+                            if(countriesTextArray.size() < 2){
+                                countriesLabel.setText(model.getCountryName());
+                            }
+                            else{
+                                countriesLabel.setText(countriesLabel.getText() + ", " + model.getCountryName());
+                            }
                         }
                     }
                     catch ( NullPointerException n1){
@@ -68,12 +73,6 @@ public class PrimaryController {
                         alert.show();
                     } catch (Exception exception) {
                         exception.printStackTrace();
-                    }
-                    if(countriesTextArray.size() < 2){
-                    countriesLabel.setText(model.getCountryName());
-                    }
-                    else{
-                    countriesLabel.setText(countriesLabel.getText() + ", " + model.getCountryName());
                     }
                     countriesTextField.setText("");
                     countriesTextField.requestFocus();
@@ -90,20 +89,18 @@ public class PrimaryController {
             alert.show();
         }
         else{
-            countriesText = countriesLabel.getText().trim().toLowerCase();
-            String tempWord = countriesTextField.getText().trim().toLowerCase();
-            if (!countriesText.contains(countriesTextField.getText().trim().toLowerCase())){
+            String tempWord = countriesTextField.getText().trim();
+            if (!countriesTextArray.toString().toLowerCase().contains(tempWord.toLowerCase())){
                 //TODO Create a function for the alert thing
                 Alert alert = new Alert(Alert.AlertType.WARNING, "You have not input the country name yet");
                 alert.show();
             }
             else{
-                if (countriesText.endsWith(tempWord)){
-                    countriesText = countriesText.replaceAll(", " + tempWord, "");
-                }
-                countriesText = countriesText.replaceAll(tempWord + ", ", "");
-                countriesText = countriesText.replaceAll(tempWord, "");
-                countriesLabel.setText(countriesText);
+                countryArray.removeIf(removeCountryModel -> removeCountryModel.getCountryName().toLowerCase().equals(tempWord.toLowerCase()));
+                countriesTextArray.removeIf(removeCountryText -> removeCountryText.toLowerCase().equals(tempWord.toLowerCase()));
+                String temp = countriesTextArray.toString();
+                temp = temp.replaceAll("[^A-Za-z, ]", "");
+                countriesLabel.setText(temp);
                 countriesTextField.setText("");
             }
         }

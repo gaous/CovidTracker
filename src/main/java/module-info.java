@@ -4,6 +4,6 @@ module org.apiapplication {
     requires javafx.graphics;
     requires json.simple;
 
-    opens org.apiapplication to javafx.fxml;
-    exports org.apiapplication;
+    opens org.covidTracker to javafx.fxml;
+    exports org.covidTracker;
 }
