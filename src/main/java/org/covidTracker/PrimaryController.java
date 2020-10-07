@@ -1,4 +1,4 @@
-package org.apiapplication;
+package org.covidTracker;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

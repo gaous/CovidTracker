@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.covidTracker.PrimaryController">
+<top>
+   <MenuBar BorderPane.alignment="CENTER">
+      <Menu mnemonicParsing="false" text="File">
+         <MenuItem mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Edit">
+         <MenuItem mnemonicParsing="false" onAction="#handleDeleteCountriesFromLabels" text="Delete"/>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+         <MenuItem mnemonicParsing="false" text="About"/>
+      </Menu>
+   </MenuBar>
+</top>
+<center>
+   <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <BorderPane.margin>
+         <Insets/>
+      </BorderPane.margin>
+      <Label fx:id="globalDataLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="596.0"
+             text="As of Today, there are 1162857 Total Confirmed cases with 63263 Total Deaths and 230845 Total Recovered case"
+             textAlignment="CENTER" wrapText="true">
+         <tooltip>
+            <Tooltip
+                    text="Please refresh to see the updated numbers. The refresh button is present under the File menu"/>
+         </tooltip>
+         <font>
+            <Font size="17.0"/>
+         </font>
+         <padding>
+            <Insets left="50.0"/>
+         </padding>
+         <VBox.margin>
+            <Insets bottom="20.0" left="5.0" right="5.0" top="-150.0"/>
+         </VBox.margin>
+      </Label>
+      <TextField fx:id="countriesTextField" alignment="CENTER" onKeyPressed="#handleEnterButton"
+                 promptText="Enter name of countries you want to search">
+         <VBox.margin>
+            <Insets left="10.0" right="10.0"/>
+         </VBox.margin>
+         <padding>
+            <Insets bottom="20.0"/>
+         </padding>
+      </TextField>
+      <ScrollPane fitToHeight="true" fitToWidth="true" onMouseReleased="#handleDeleteCountriesFromLabels"
+                  onTouchReleased="#handleDeleteCountriesFromLabels">
+         <VBox.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="10.0"/>
+         </VBox.margin>
+         <Label fx:id="countriesLabel" alignment="CENTER" contentDisplay="CENTER"
+                onMouseReleased="#handleDeleteCountriesFromLabels" onTouchReleased="#handleDeleteCountriesFromLabels"
+                snapToPixel="false" textAlignment="CENTER" wrapText="true">
+            <font>
+               <Font size="24.0"/>
+            </font>
+         </Label>
+      </ScrollPane>
+   </VBox>
+</center>
+<bottom>
+   <Button mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="25.0" prefWidth="284.0" text="Search" BorderPane.alignment="CENTER">
+      <padding>
+         <Insets bottom="11.0" top="11.0" />
+      </padding>
+      <BorderPane.margin>
+         <Insets bottom="10.0" />
+      </BorderPane.margin></Button>
+</bottom>
+</BorderPane>

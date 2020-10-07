@@ -1,4 +1,4 @@
-package org.apiapplication;
+package org.covidTracker;
 
 public class Model {
     private String countryName;

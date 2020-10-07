@@ -1,4 +1,4 @@
-package org.apiapplication;
+package org.covidTracker;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

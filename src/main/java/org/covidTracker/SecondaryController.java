@@ -1,4 +1,4 @@
-package org.apiapplication;
+package org.covidTracker;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
