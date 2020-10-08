@@ -1,7 +1,7 @@
 package org.covidTracker;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +13,10 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SecondaryController {
 
@@ -29,11 +30,11 @@ public class SecondaryController {
     @FXML
     private TextArea detailsTextArea;
 
-    ObservableList<String> countryNameList = FXCollections.observableArrayList();
-    ObservableList<String> list = FXCollections.observableArrayList();
+    ObservableSet<String> countryNameList = FXCollections.observableSet();
+    ObservableSet<String> list = FXCollections.observableSet();
 
     public Model m;
-    public List<Model> arraysOfModel = new ArrayList<>();
+    public Set<Model> arraysOfModel = new HashSet<>();
 
 
     @FXML
@@ -70,6 +71,10 @@ public class SecondaryController {
         loader.setLocation(getClass().getResource("primary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
+        PrimaryController controller = loader.getController();
+        Set<String> a = list;
+        Set<Model> b = arraysOfModel;
+        controller.initialize(a, b);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();

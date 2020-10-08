@@ -17,6 +17,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PrimaryController {
 
@@ -30,8 +31,8 @@ public class PrimaryController {
     private TextField countriesTextField;
     @FXML
     private Label countriesLabel;
-    Model model = new Model();
 
+    Model model = new Model();
     ArrayList<String> countriesTextArray = new ArrayList<>();
     ArrayList<Model> countryArray = new ArrayList<>();
 
@@ -142,5 +143,17 @@ public class PrimaryController {
 
         model = APIController.getDataFromAPI("Global", true, "");
         globalDataLabel.setText(model.getDetails(false));
+    }
+
+    @FXML
+    public void initialize(Set<String> countryNameList, Set<Model> modelList){
+        countriesTextArray.clear();
+        countriesTextArray.addAll(countryNameList);
+        countryArray.clear();
+        countryArray.addAll(modelList);
+        System.out.println("countriesTextArray is " + countriesTextArray);
+        String temp = countriesTextArray.toString();
+        temp = temp.replaceAll("[^A-Za-z, ]", "");
+        countriesLabel.setText(temp);
     }
 }
