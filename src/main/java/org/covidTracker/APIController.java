@@ -10,6 +10,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * JavaFX App built with Maven
+ * @author: Gaous Muhammad Saklaen
+ */
+
 public class APIController {
 
     public static JSONObject initializeAPI() throws IOException, ParseException {

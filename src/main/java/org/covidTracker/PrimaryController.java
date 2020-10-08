@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * JavaFX App built with Maven
+ * @author: Gaous Muhammad Saklaen
+ */
+
 public class PrimaryController {
 
 //    @FXML
@@ -54,17 +59,21 @@ public class PrimaryController {
                                 if (!countriesTextArray.toString().toLowerCase().contains(tempCountryName.toLowerCase())) {
                                     countriesTextArray.add(model.getCountryName());
                                     countryArray.add(model);
+                                    System.out.println(countriesTextArray);
                                 }
                                 else{
                                     //TODO Create a function for the alert thing
                                     Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
                                     alert.show();
+                                    System.out.println(countriesTextArray);
                                 }
                             if(countriesTextArray.size() < 2){
                                 countriesLabel.setText(model.getCountryName());
                             }
                             else{
-                                countriesLabel.setText(countriesLabel.getText() + ", " + model.getCountryName());
+                                String temp = countriesTextArray.toString();
+                                temp = temp.replaceAll("[^A-Za-z, ]", "");
+                                countriesLabel.setText(temp);
                             }
                         }
                     }
@@ -124,7 +133,7 @@ public class PrimaryController {
             window.setScene(scene);
             window.show();
         }
-
+        countriesTextField.requestFocus();
     }
 
     private boolean isSearchEligibleNow(){

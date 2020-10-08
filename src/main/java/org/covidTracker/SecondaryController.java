@@ -18,6 +18,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * JavaFX App built with Maven
+ * @author: Gaous Muhammad Saklaen
+ */
+
 public class SecondaryController {
 
 //    @FXML

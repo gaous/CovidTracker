@@ -1,3 +1,4 @@
+
 package org.covidTracker;
 
 import javafx.application.Application;
@@ -9,7 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX App built with Maven
+ * @author: Gaous Muhammad Saklaen
  */
 public class App extends Application {
 

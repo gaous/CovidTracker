@@ -9,59 +9,55 @@
 <top>
    <MenuBar BorderPane.alignment="CENTER">
       <Menu mnemonicParsing="false" text="File">
-         <MenuItem mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh"/>
+         <MenuItem mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
       </Menu>
       <Menu mnemonicParsing="false" text="Edit">
-         <MenuItem mnemonicParsing="false" onAction="#handleDeleteCountriesFromLabels" text="Delete"/>
+         <MenuItem mnemonicParsing="false" onAction="#handleDeleteCountriesFromLabels" text="Delete" />
       </Menu>
       <Menu mnemonicParsing="false" text="Help">
-         <MenuItem mnemonicParsing="false" text="About"/>
+         <MenuItem mnemonicParsing="false" text="About" />
       </Menu>
    </MenuBar>
 </top>
 <center>
    <VBox alignment="CENTER" BorderPane.alignment="CENTER">
       <BorderPane.margin>
-         <Insets/>
+         <Insets />
       </BorderPane.margin>
-      <Label fx:id="globalDataLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="596.0"
-             text="As of Today, there are 1162857 Total Confirmed cases with 63263 Total Deaths and 230845 Total Recovered case"
-             textAlignment="CENTER" wrapText="true">
+      <Label fx:id="globalDataLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="596.0" text="As of Today, there are 1162857 Total Confirmed cases with 63263 Total Deaths and 230845 Total Recovered case" textAlignment="CENTER" wrapText="true">
          <tooltip>
-            <Tooltip
-                    text="Please refresh to see the updated numbers. The refresh button is present under the File menu"/>
+            <Tooltip text="Please refresh to see the updated numbers. The refresh button is present under the File menu" />
          </tooltip>
          <font>
-            <Font size="17.0"/>
+            <Font name="OCR A Extended" size="17.0" />
          </font>
          <padding>
-            <Insets left="50.0"/>
+            <Insets left="5.0" right="5.0" top="20.0" />
          </padding>
          <VBox.margin>
-            <Insets bottom="20.0" left="5.0" right="5.0" top="-150.0"/>
+            <Insets bottom="-50.0" left="5.0" right="5.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="countriesTextField" alignment="CENTER" onKeyPressed="#handleEnterButton"
-                 promptText="Enter name of countries you want to search">
+      <TextField fx:id="countriesTextField" alignment="CENTER" onKeyPressed="#handleEnterButton" promptText="Enter name of countries you want to search">
          <VBox.margin>
-            <Insets left="10.0" right="10.0"/>
+            <Insets bottom="-150.0" left="10.0" right="10.0" top="100.0" />
          </VBox.margin>
          <padding>
-            <Insets bottom="20.0"/>
+            <Insets bottom="15.0" top="15.0" />
          </padding>
       </TextField>
-      <ScrollPane fitToHeight="true" fitToWidth="true" onMouseReleased="#handleDeleteCountriesFromLabels"
-                  onTouchReleased="#handleDeleteCountriesFromLabels">
+      <ScrollPane fitToWidth="true" onMouseReleased="#handleDeleteCountriesFromLabels" onTouchReleased="#handleDeleteCountriesFromLabels" VBox.vgrow="ALWAYS">
          <VBox.margin>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="10.0"/>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="200.0" />
          </VBox.margin>
-         <Label fx:id="countriesLabel" alignment="CENTER" contentDisplay="CENTER"
-                onMouseReleased="#handleDeleteCountriesFromLabels" onTouchReleased="#handleDeleteCountriesFromLabels"
-                snapToPixel="false" textAlignment="CENTER" wrapText="true">
+         <Label fx:id="countriesLabel" alignment="CENTER" contentDisplay="CENTER" onMouseReleased="#handleDeleteCountriesFromLabels" onTouchReleased="#handleDeleteCountriesFromLabels" snapToPixel="false" textAlignment="CENTER" wrapText="true">
             <font>
-               <Font size="24.0"/>
+               <Font name="Yu Gothic Light" size="24.0" />
             </font>
          </Label>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
       </ScrollPane>
    </VBox>
 </center>
@@ -72,6 +68,9 @@
       </padding>
       <BorderPane.margin>
          <Insets bottom="10.0" />
-      </BorderPane.margin></Button>
+      </BorderPane.margin>
+         <font>
+            <Font name="Papyrus" size="12.0" />
+         </font></Button>
 </bottom>
 </BorderPane>

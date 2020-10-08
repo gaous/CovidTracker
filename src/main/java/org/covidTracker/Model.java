@@ -1,5 +1,10 @@
 package org.covidTracker;
 
+/**
+ * JavaFX App built with Maven
+ * @author: Gaous Muhammad Saklaen
+ */
+
 public class Model {
     private String countryName;
     private String newConfirmed;
