@@ -1,9 +1,7 @@
 package org.covidTracker;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -17,7 +15,7 @@ import java.util.Scanner;
 
 public class APIController {
 
-    public static JSONObject initializeAPI() throws IOException, ParseException {
+    public static String initializeAPI() throws IOException{
         URL url = new URL("https://api.covid19api.com/summary");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -33,23 +31,23 @@ public class APIController {
                 inline.append(scanner.nextLine());
             }
             scanner.close();
-            JSONParser parse = new JSONParser();
-            return (JSONObject) parse.parse(inline.toString());
+            return inline.toString();
         }
     }
 
-    public static Model getDataFromAPI(String countryCategory, boolean isGlobal, String countryName) throws IOException, ParseException {
+    public static Model getDataFromAPI(String countryCategory, boolean isGlobal, String countryName) throws IOException{
         Model model = new Model();
-        JSONObject data_obj = initializeAPI();
+        String data_obj = initializeAPI();
+        JSONObject obj = new JSONObject(data_obj);
         if(countryCategory.equals("Global") && isGlobal && countryName.equals("")){
-            JSONObject obj = (JSONObject) data_obj.get("Global");
-            model.setTotalConfirmed(obj.get("TotalConfirmed").toString());
-            model.setTotalDeaths(obj.get("TotalDeaths").toString());
-            model.setTotalRecovered(obj.get("TotalRecovered").toString());
+            JSONObject tempObj = obj.getJSONObject("Global");
+            model.setTotalConfirmed(tempObj.get("TotalConfirmed").toString());
+            model.setTotalDeaths(tempObj.get("TotalDeaths").toString());
+            model.setTotalRecovered(tempObj.get("TotalRecovered").toString());
         }
         else if(countryCategory.equals("Countries") && !isGlobal && !countryName.equals("")){
-            JSONArray arr = (JSONArray) data_obj.get("Countries");
-            for (Object o : arr) {
+            JSONArray tempObj = obj.getJSONArray("Countries");
+            for (Object o : tempObj) {
                 JSONObject new_obj = (JSONObject) o;
                 if (new_obj.get("Country").toString().toLowerCase().equals(countryName.toLowerCase())) {
                     model.setSlug_name(new_obj.get("Slug").toString());

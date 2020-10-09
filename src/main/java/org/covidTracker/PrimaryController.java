@@ -12,9 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -78,6 +78,10 @@ public class PrimaryController {
                     catch ( NullPointerException n1){
                         //TODO Create a function for the alert thing
                         Alert alert = new Alert(Alert.AlertType.WARNING, "Please input a valid country name");
+                        alert.show();
+                    } catch (UnknownHostException ex){
+                        //TODO Create a function for the alert thing
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Please connect to internet and try again");
                         alert.show();
                     } catch (Exception exception) {
                         exception.printStackTrace();
@@ -158,10 +162,17 @@ public class PrimaryController {
         }
     }
 
-    public void handleRefreshButton() throws IOException, ParseException {
+    public void handleRefreshButton() throws IOException{
 
-        model = APIController.getDataFromAPI("Global", true, "");
-        globalDataLabel.setText(model.getDetails(false));
+        try{
+            model = APIController.getDataFromAPI("Global", true, "");
+            globalDataLabel.setText(model.getDetails(false));
+        } catch (UnknownHostException ex){
+            //TODO Create a function for the alert thing
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please connect to internet and try again");
+            alert.show();
+        }
+
     }
 
     @FXML
