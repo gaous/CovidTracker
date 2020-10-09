@@ -59,13 +59,11 @@ public class PrimaryController {
                                 if (!countriesTextArray.toString().toLowerCase().contains(tempCountryName.toLowerCase())) {
                                     countriesTextArray.add(model.getCountryName());
                                     countryArray.add(model);
-                                    System.out.println(countriesTextArray);
                                 }
                                 else{
                                     //TODO Create a function for the alert thing
                                     Alert alert = new Alert(Alert.AlertType.WARNING, "The country name is already included");
                                     alert.show();
-                                    System.out.println(countriesTextArray);
                                 }
                             if(countriesTextArray.size() < 2){
                                 countriesLabel.setText(model.getCountryName());
@@ -118,6 +116,17 @@ public class PrimaryController {
     }
 
     @FXML
+    private void handleAboutButton(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("About.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+        Stage window = new Stage();
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML
     private void handleSearchButton(ActionEvent event) throws IOException{
 //            App.setRoot("secondary");
         if(isSearchEligibleNow()){
@@ -133,7 +142,6 @@ public class PrimaryController {
             window.setScene(scene);
             window.show();
         }
-        countriesTextField.requestFocus();
     }
 
     private boolean isSearchEligibleNow(){
@@ -141,6 +149,7 @@ public class PrimaryController {
             //TODO Create a function for the alert thing
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please input at least 1 country name to search for the data");
             alert.show();
+            countriesTextField.requestFocus();
             return false;
         }
         else{
@@ -160,7 +169,6 @@ public class PrimaryController {
         countriesTextArray.addAll(countryNameList);
         countryArray.clear();
         countryArray.addAll(modelList);
-        System.out.println("countriesTextArray is " + countriesTextArray);
         String temp = countriesTextArray.toString();
         temp = temp.replaceAll("[^A-Za-z, ]", "");
         countriesLabel.setText(temp);

@@ -45,11 +45,9 @@ public class SecondaryController {
     @FXML
     public void initialize(List<String> countryNameList, List<Model> model){
         list.addAll(countryNameList);
-        System.out.println(model);
         for (Model a:
                 model) {
             m = a;
-            System.out.println("Country name from model is " + m.getCountryName());
             arraysOfModel.add(m);
             this.countryNameList.add(m.getCountryName());
         }
@@ -83,6 +81,5 @@ public class SecondaryController {
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
-
     }
 }

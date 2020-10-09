@@ -51,7 +51,7 @@ public class APIController {
             JSONArray arr = (JSONArray) data_obj.get("Countries");
             for (Object o : arr) {
                 JSONObject new_obj = (JSONObject) o;
-                if (new_obj.get("Country").toString().toLowerCase().equals(countryName)) {
+                if (new_obj.get("Country").toString().toLowerCase().equals(countryName.toLowerCase())) {
                     model.setSlug_name(new_obj.get("Slug").toString());
                     model.setCountryName(new_obj.get("Country").toString());
                     model.setNewConfirmed(new_obj.get("NewConfirmed").toString());

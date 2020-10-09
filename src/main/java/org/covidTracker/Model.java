@@ -39,7 +39,7 @@ public class Model {
             return "As of Today, there are " +
                     this.getTotalConfirmed() + " Total Confirmed cases with " +
                     this.getTotalDeaths() + " Total Deaths and " +
-                    this.getTotalRecovered() + " Total Recovered case Globally";
+                    this.getTotalRecovered() + " Total Recovered cases Globally";
     }
 
     public void setDetails(String details) {

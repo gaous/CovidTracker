@@ -15,7 +15,7 @@
          <MenuItem mnemonicParsing="false" onAction="#handleDeleteCountriesFromLabels" text="Delete" />
       </Menu>
       <Menu mnemonicParsing="false" text="Help">
-         <MenuItem mnemonicParsing="false" text="About" />
+         <MenuItem mnemonicParsing="false" onAction="#handleAboutButton" text="About" />
       </Menu>
    </MenuBar>
 </top>
@@ -24,7 +24,7 @@
       <BorderPane.margin>
          <Insets />
       </BorderPane.margin>
-      <Label fx:id="globalDataLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="596.0" text="As of Today, there are 1162857 Total Confirmed cases with 63263 Total Deaths and 230845 Total Recovered case" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="globalDataLabel" alignment="CENTER" contentDisplay="CENTER" text="As of 2020-04-05, there are 1162857 Total Confirmed cases with 63263 Total Deaths and 230845 Total Recovered cases Globally" textAlignment="CENTER" wrapText="true">
          <tooltip>
             <Tooltip text="Please refresh to see the updated numbers. The refresh button is present under the File menu" />
          </tooltip>

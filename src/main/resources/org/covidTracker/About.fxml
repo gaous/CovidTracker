@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1">
+   <Label alignment="CENTER"
+          text="Welcome here. The application was made by Gaous Muhammad Saklaen with &lt;3. The application provides statistics of each country. User can search multiple countries at once and results are shown to the user. All COVID data are pulled from an API (https://api.covid19api.com/summary). The application is created using MAVEN build tools with JavaFx."
+          wrapText="true">
+      <font>
+         <Font name="Algerian" size="18.0"/>
+      </font>
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="30.0"/>
+      </padding>
+   </Label>
+</ScrollPane>
