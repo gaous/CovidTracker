@@ -116,13 +116,14 @@ public class PrimaryController {
     }
 
     @FXML
-    private void handleAboutButton(ActionEvent event) throws IOException{
+    private void handleAboutButton() throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("About.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
         Stage window = new Stage();
         window.setScene(scene);
+        window.setTitle("COVID Tracker About page");
         window.show();
     }
 
